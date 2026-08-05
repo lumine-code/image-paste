@@ -16,6 +16,11 @@
   },
   "license": "MIT",
   "main": "./lib/main",
+  "files": [
+    "lib",
+    "spec",
+    "styles"
+  ],
   "engines": {
     "lumine": "^1.0.0"
   },
