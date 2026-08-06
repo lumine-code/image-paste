@@ -20,7 +20,9 @@ describe("image-paste", () => {
   afterEach(() => {
     clipboard.write({ image: originalClipboardImage, text: originalClipboardText });
     imagePaste.saveDialog = originalSaveDialog;
-    fs.rmSync(directoryPath, { recursive: true, force: true });
+    // Retries because Windows keeps a directory non-empty until the last handle on a child
+    // closes, and `force` swallows only ENOENT.
+    fs.rmSync(directoryPath, { recursive: true, force: true, maxRetries: 10, retryDelay: 50 });
   });
 
   it("claims image data and snapshots it before opening the save dialog", () => {
