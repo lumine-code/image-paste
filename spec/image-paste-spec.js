@@ -1,7 +1,7 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { clipboard, nativeImage } = require("@electron/remote");
+const { clipboard, nativeImage } = require("electron");
 const imagePaste = require("../lib/main");
 const SaveDialog = require("../lib/save-dialog");
 
