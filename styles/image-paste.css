@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-atom-panel.modal .image-paste.save-dialog atom-text-editor[mini] {
+lumine-panel.modal .image-paste.save-dialog lumine-text-editor[mini] {
   margin-bottom: 0;
 }
 

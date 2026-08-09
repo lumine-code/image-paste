@@ -16,7 +16,7 @@ To install `image-paste` search for _image-paste_ in the Install pane of the Lum
 
 ## Commands
 
-Commands available in `atom-text-editor:not([mini])`:
+Commands available in `lumine-text-editor:not([mini])`:
 
 - `image-paste:paste`: save the clipboard image and insert its relative path.
 

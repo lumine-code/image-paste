@@ -9,7 +9,7 @@ describe("image-paste", () => {
   let directoryPath, originalClipboardImage, originalClipboardText, originalSaveDialog;
 
   beforeEach(async () => {
-    await atom.packages.activatePackage("image-paste");
+    await lumine.packages.activatePackage("image-paste");
     directoryPath = fs.mkdtempSync(path.join(os.tmpdir(), "image-paste-"));
     originalClipboardImage = clipboard.readImage();
     originalClipboardText = clipboard.readText();
@@ -56,12 +56,12 @@ describe("image-paste", () => {
       isEmpty: () => false,
       toPNG: () => pngBuffer,
     });
-    spyOn(atom.notifications, "addWarning");
-    atom.project.setPaths([]);
-    const editor = atom.workspace.buildTextEditor();
+    spyOn(lumine.notifications, "addWarning");
+    lumine.project.setPaths([]);
+    const editor = lumine.workspace.buildTextEditor();
 
     expect(imagePaste.handlePaste({ target: { type: "text-editor", editor } })).toBe(true);
-    expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+    expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
       "Save the editor or open a project before pasting an image.",
     );
     expect(imagePaste.saveDialog.prepare).not.toHaveBeenCalled();
@@ -81,15 +81,15 @@ describe("image-paste", () => {
     fs.mkdirSync(editorDirectory);
     const editorPath = path.join(editorDirectory, "document.md");
     fs.writeFileSync(editorPath, "");
-    atom.project.setPaths([directoryPath]);
-    const editor = await atom.workspace.open(editorPath);
+    lumine.project.setPaths([directoryPath]);
+    const editor = await lumine.workspace.open(editorPath);
     const image = nativeImage.createFromDataURL(
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
     );
     expect(image.isEmpty()).toBe(false);
     clipboard.writeImage(image);
 
-    atom.views.getView(editor).pasteText();
+    lumine.views.getView(editor).pasteText();
 
     const { target, pngBuffer } = imagePaste.saveDialog.prepare.calls.mostRecent().args[0];
     expect(target.type).toBe("text-editor");
