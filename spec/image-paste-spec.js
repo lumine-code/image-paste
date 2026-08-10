@@ -1,24 +1,21 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { clipboard, nativeImage } = require("electron");
+const { nativeImage } = require("electron");
 const imagePaste = require("../lib/main");
 const SaveDialog = require("../lib/save-dialog");
 
 describe("image-paste", () => {
-  let directoryPath, originalClipboardImage, originalClipboardText, originalSaveDialog;
+  let directoryPath, originalSaveDialog;
 
   beforeEach(async () => {
     await lumine.packages.activatePackage("image-paste");
     directoryPath = fs.mkdtempSync(path.join(os.tmpdir(), "image-paste-"));
-    originalClipboardImage = clipboard.readImage();
-    originalClipboardText = clipboard.readText();
     originalSaveDialog = imagePaste.saveDialog;
     imagePaste.saveDialog = { prepare: jasmine.createSpy("prepare") };
   });
 
   afterEach(() => {
-    clipboard.write({ image: originalClipboardImage, text: originalClipboardText });
     imagePaste.saveDialog = originalSaveDialog;
     // Retries because Windows keeps a directory non-empty until the last handle on a child
     // closes, and `force` swallows only ENOENT.
@@ -27,7 +24,7 @@ describe("image-paste", () => {
 
   it("claims image data and snapshots it before opening the save dialog", () => {
     const pngBuffer = Buffer.from("png image data");
-    spyOn(clipboard, "readImage").and.returnValue({
+    spyOn(lumine.clipboard, "readImage").and.returnValue({
       isEmpty: () => false,
       toPNG: () => pngBuffer,
     });
@@ -42,7 +39,7 @@ describe("image-paste", () => {
   });
 
   it("falls through when the clipboard does not contain an image", () => {
-    spyOn(clipboard, "readImage").and.returnValue({ isEmpty: () => true });
+    spyOn(lumine.clipboard, "readImage").and.returnValue({ isEmpty: () => true });
 
     expect(imagePaste.handlePaste({ target: { type: "directory", path: directoryPath } })).toBe(
       false,
@@ -52,7 +49,7 @@ describe("image-paste", () => {
 
   it("explains why an image cannot be pasted into an untitled editor", () => {
     const pngBuffer = Buffer.from("png image data");
-    spyOn(clipboard, "readImage").and.returnValue({
+    spyOn(lumine.clipboard, "readImage").and.returnValue({
       isEmpty: () => false,
       toPNG: () => pngBuffer,
     });
@@ -87,7 +84,10 @@ describe("image-paste", () => {
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
     );
     expect(image.isEmpty()).toBe(false);
-    clipboard.writeImage(image);
+    // Spied rather than written for real: the round trip to the native
+    // clipboard is core's to test, and a spec has no business clobbering the
+    // clipboard of whoever is running it.
+    spyOn(lumine.clipboard, "readImage").and.returnValue(image);
 
     lumine.views.getView(editor).pasteText();
 
