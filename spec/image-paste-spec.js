@@ -64,6 +64,54 @@ describe("image-paste", () => {
     expect(imagePaste.saveDialog.prepare).not.toHaveBeenCalled();
   });
 
+  describe("the terminal target", () => {
+    let model;
+
+    beforeEach(() => {
+      model = { paste: jasmine.createSpy("model.paste") };
+    });
+
+    it("saves relative to the directory the terminal was launched in", () => {
+      const pngBuffer = Buffer.from("png image data");
+      spyOn(lumine.clipboard, "readImage").and.returnValue({
+        isEmpty: () => false,
+        toPNG: () => pngBuffer,
+      });
+
+      expect(
+        imagePaste.handlePaste({ target: { type: "terminal", model, path: directoryPath } }),
+      ).toBe(true);
+      expect(imagePaste.saveDialog.prepare).toHaveBeenCalledWith({
+        target: { type: "terminal", model, basePath: directoryPath },
+        pngBuffer,
+      });
+    });
+
+    it("writes an absolute path, because the shell may have cd'd away", () => {
+      const filePath = path.join(directoryPath, "screenshot.png");
+
+      SaveDialog.prototype.insertPath.call({ target: { type: "terminal", model } }, filePath);
+
+      expect(model.paste).toHaveBeenCalledWith(filePath);
+    });
+
+    it("quotes a path a shell would otherwise split", () => {
+      const filePath = path.join(directoryPath, "two words.png");
+
+      SaveDialog.prototype.insertPath.call({ target: { type: "terminal", model } }, filePath);
+
+      expect(model.paste).toHaveBeenCalledWith(`"${filePath}"`);
+    });
+
+    it("never submits the line it wrote", () => {
+      const filePath = path.join(directoryPath, "screenshot.png");
+
+      SaveDialog.prototype.insertPath.call({ target: { type: "terminal", model } }, filePath);
+
+      expect(model.paste.calls.argsFor(0)[0]).not.toMatch(/[\r\n]/);
+    });
+  });
+
   it("normalizes unsupported output extensions to PNG", () => {
     expect(SaveDialog.prototype.normalizeImagePath("assets/example.gif")).toBe(
       "assets/example.png",

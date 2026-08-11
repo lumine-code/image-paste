@@ -9,6 +9,7 @@ Paste clipboard images into projects as image files.
 - **Automatic naming**: suggests stable names based on the document and image content.
 - **Editor integration**: inserts a relative path only after the image is written successfully.
 - **Tree-view integration**: saves images into the selected directory without replacing tree-view's internal clipboard.
+- **Terminal integration**: writes an absolute, shell-safe path onto a terminal's input line.
 
 ## Installation
 
@@ -27,6 +28,8 @@ Commands available in `.tree-view`:
 ## Usage
 
 Copy an image, invoke the normal paste command or `image-paste:paste`, review the suggested path, and confirm the save. Editor paths are relative to the current document's directory; tree-view paths remain relative to the selected directory. PNG, JPG, and JPEG output names are supported; other extensions are converted to PNG.
+
+Pasting into a terminal saves relative to the directory that terminal was launched in, then writes the saved file's **absolute** path onto the input line — the shell may have cd'd elsewhere since, and only an absolute path stays true. It is quoted only when it contains whitespace, and never followed by a newline, so nothing is submitted for you. This is the form command-line programs read an image in, including coding agents that take one by path.
 
 ## Customization
 
