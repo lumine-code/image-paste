@@ -13,7 +13,7 @@ Paste clipboard images into projects as image files.
 
 ## Installation
 
-To install `image-paste` search for _image-paste_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/image-paste`.
+To install `image-paste` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/image-paste`.
 
 ## Commands
 
@@ -44,7 +44,7 @@ Customize the modal with CSS and package custom properties:
 
 ## Services
 
-- **tree-view.selection** (`^1.0.0`): consumed to locate the selected directory for explicit image paste commands.
+- `tree-view.selection`: consumed to locate the selected directory for explicit image paste commands.
 
 ## Contributing
 
