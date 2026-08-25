@@ -22,16 +22,18 @@ describe("image-paste", () => {
     fs.rmSync(directoryPath, { recursive: true, force: true, maxRetries: 10, retryDelay: 50 });
   });
 
-  it("claims image data and snapshots it before opening the save dialog", () => {
+  it("claims image data and snapshots it before opening the save dialog", async () => {
     const pngBuffer = Buffer.from("png image data");
-    spyOn(lumine.clipboard, "readImage").and.returnValue({
-      isEmpty: () => false,
-      toPNG: () => pngBuffer,
-    });
-
-    expect(imagePaste.handlePaste({ target: { type: "directory", path: directoryPath } })).toBe(
-      true,
+    spyOn(lumine.clipboard, "readImage").and.returnValue(
+      Promise.resolve({
+        isEmpty: () => false,
+        toPNG: () => pngBuffer,
+      }),
     );
+
+    expect(
+      await imagePaste.handlePaste({ target: { type: "directory", path: directoryPath } }),
+    ).toBe(true);
     expect(imagePaste.saveDialog.prepare).toHaveBeenCalledWith({
       target: { type: "directory", basePath: directoryPath },
       pngBuffer,
@@ -135,9 +137,9 @@ describe("image-paste", () => {
     // Spied rather than written for real: the round trip to the native
     // clipboard is core's to test, and a spec has no business clobbering the
     // clipboard of whoever is running it.
-    spyOn(lumine.clipboard, "readImage").and.returnValue(image);
+    spyOn(lumine.clipboard, "readImage").and.returnValue(Promise.resolve(image));
 
-    lumine.views.getView(editor).pasteText();
+    await lumine.views.getView(editor).pasteText();
 
     const { target, pngBuffer } = imagePaste.saveDialog.prepare.calls.mostRecent().args[0];
     expect(target.type).toBe("text-editor");
