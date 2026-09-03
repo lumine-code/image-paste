@@ -1,13 +1,13 @@
-.image-paste.save-dialog {
+lumine-panel.modal.image-paste.save-dialog > lumine-input-dialog {
   display: flex;
   flex-direction: column;
 }
 
-lumine-panel.modal .image-paste.save-dialog lumine-text-editor[mini] {
+lumine-panel.modal.image-paste.save-dialog lumine-text-editor[mini] {
   margin-bottom: 0;
 }
 
-.image-paste.save-dialog .image-paste-preview {
+lumine-panel.modal.image-paste.save-dialog .image-paste-preview {
   position: relative;
   align-self: center;
   width: fit-content;
@@ -15,7 +15,7 @@ lumine-panel.modal .image-paste.save-dialog lumine-text-editor[mini] {
   box-sizing: border-box;
 }
 
-.image-paste.save-dialog .image-paste-preview img {
+lumine-panel.modal.image-paste.save-dialog .image-paste-preview img {
   display: block;
   width: auto;
   height: auto;

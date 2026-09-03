@@ -123,6 +123,20 @@ describe("image-paste", () => {
     );
   });
 
+  it("keeps the preview layout on the model inside its modal host", async () => {
+    jasmine.attachToDOM(lumine.workspace.getElement());
+    const dialog = new SaveDialog({ nativeImage });
+
+    try {
+      const panelElement = dialog.inputDialogHost.getPanel().getElement();
+      expect(panelElement.matches("lumine-panel.modal.image-paste.save-dialog")).toBe(true);
+      expect(getComputedStyle(dialog.inputDialog.getElement()).display).toBe("flex");
+      expect(getComputedStyle(dialog.previewElement).alignSelf).toBe("center");
+    } finally {
+      await dialog.destroy();
+    }
+  });
+
   it("handles the normal editor paste command through the provider registry", async () => {
     const editorDirectory = path.join(directoryPath, "docs");
     fs.mkdirSync(editorDirectory);
