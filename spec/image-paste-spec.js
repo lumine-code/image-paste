@@ -2,14 +2,17 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { nativeImage } = require("electron");
-const imagePaste = require("../lib/main");
-const SaveDialog = require("../lib/save-dialog");
 
 describe("image-paste", () => {
-  let directoryPath, originalSaveDialog;
+  let directoryPath, originalSaveDialog, imagePaste, SaveDialog;
 
   beforeEach(async () => {
-    await lumine.packages.activatePackage("image-paste");
+    const pack = await lumine.packages.activatePackage("image-paste");
+    // Package activation can replace the module generation after a previous
+    // spec unload. Reacquire the live exports instead of retaining a stale
+    // top-level require from the discarded generation.
+    imagePaste = pack.mainModule;
+    SaveDialog = require("../lib/save-dialog");
     directoryPath = fs.mkdtempSync(path.join(os.tmpdir(), "image-paste-"));
     originalSaveDialog = imagePaste.saveDialog;
     imagePaste.saveDialog = { prepare: jasmine.createSpy("prepare") };
