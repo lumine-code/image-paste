@@ -29,7 +29,7 @@ lumine-panel.modal.image-paste.save-dialog .image-paste-preview img {
     var(--inset-panel-background-color)
   );
   border: 1px solid var(--base-border-color);
-  border-radius: var(--component-border-radius);
+  border-radius: var(--ui-border-radius);
   object-fit: contain;
   object-position: center;
 }
