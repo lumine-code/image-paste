@@ -52,6 +52,15 @@ describe("image-paste", () => {
     expect(imagePaste.saveDialog.prepare).not.toHaveBeenCalled();
   });
 
+  it("does not inspect the filesystem for an ordinary text paste into a directory", () => {
+    spyOn(lumine.clipboard, "readImage").and.returnValue({ isEmpty: () => true });
+    const stat = spyOn(fs, "statSync").and.callThrough();
+    expect(imagePaste.handlePaste({ target: { type: "directory", path: directoryPath } })).toBe(
+      false,
+    );
+    expect(stat).not.toHaveBeenCalled();
+  });
+
   it("explains why an image cannot be pasted into an untitled editor", () => {
     const pngBuffer = Buffer.from("png image data");
     spyOn(lumine.clipboard, "readImage").and.returnValue({
