@@ -61,10 +61,10 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     env:
       LUMINE_JASMINE_REPORTER: list
-      LUMINE_HOME: ${{ runner.temp }}/image-paste-lumine
-      TEMP: ${{ runner.temp }}/image-paste-lumine/tmp
-      TMP: ${{ runner.temp }}/image-paste-lumine/tmp
-      TMPDIR: ${{ runner.temp }}/image-paste-lumine/tmp
+      LUMINE_HOME: ${{ github.workspace }}/.image-paste-runtime
+      TEMP: ${{ github.workspace }}/.image-paste-runtime/tmp
+      TMP: ${{ github.workspace }}/.image-paste-runtime/tmp
+      TMPDIR: ${{ github.workspace }}/.image-paste-runtime/tmp
     steps:
       - name: Prepare isolated runtime directories
         run: >-
