@@ -390,7 +390,7 @@ describe("image-paste", () => {
       expect(dialog.saving).toBe(false);
     });
 
-    it("does not start writing or touch its target after destruction during mkdir", async () => {
+    it("finishes the confirmed write without touching its closed frontend", async () => {
       let finishMkdir;
       spyOn(fs.promises, "mkdir").and.returnValue(
         new Promise((done) => {
@@ -408,7 +408,10 @@ describe("image-paste", () => {
       await dialog.destroy();
       finishMkdir();
       await pending;
-      expect(write).not.toHaveBeenCalled();
+      expect(write).toHaveBeenCalledOnceWith(
+        path.join(directoryPath, "image.png"),
+        Buffer.from("image"),
+      );
       expect(model.paste).not.toHaveBeenCalled();
     });
 
