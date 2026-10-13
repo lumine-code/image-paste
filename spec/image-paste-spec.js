@@ -16,6 +16,7 @@ describe("image-paste", () => {
     directoryPath = fs.mkdtempSync(path.join(os.tmpdir(), "image-paste-"));
     originalSaveDialog = imagePaste.saveDialog;
     imagePaste.saveDialog = { prepare: jasmine.createSpy("prepare") };
+    spyOn(imagePaste, "getSaveDialog").and.callFake(() => imagePaste.saveDialog);
   });
 
   afterEach(() => {
@@ -194,7 +195,7 @@ describe("image-paste", () => {
     it("does not recreate a dialog after image decoding outlives deactivation", async () => {
       const read = deferred();
       const dialog = imagePaste.saveDialog;
-      spyOn(imagePaste, "getSaveDialog").and.returnValue(dialog);
+      imagePaste.getSaveDialog.and.returnValue(dialog);
       const pending = imagePaste.prepareImageFile(
         { name: "image.png", arrayBuffer: () => read.promise },
         { type: "directory", basePath: directoryPath },
@@ -210,7 +211,7 @@ describe("image-paste", () => {
       const read = deferred();
       const dialog = imagePaste.saveDialog;
       spyOn(lumine.clipboard, "readImage").and.returnValue(read.promise);
-      spyOn(imagePaste, "getSaveDialog").and.returnValue(dialog);
+      imagePaste.getSaveDialog.and.returnValue(dialog);
       const pending = imagePaste.handlePaste({
         target: { type: "directory", path: directoryPath },
       });
