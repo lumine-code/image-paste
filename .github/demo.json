@@ -1,0 +1,17 @@
+{
+  "title": "image-paste",
+  "description": "Paste a real plot image into the project and choose its relative filename.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "b2510733fe63d64723140ffac06e6e1d3ecc8f6f",
+  "mode": "normal",
+  "fontSettings": "default",
+  "themeSourceRevision": "6564a9e21899b5541e9c8f8006f9be6d6d72e6ad",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "Paste a real plot image into the project and choose its relative filename.",
+      "width": 1100,
+      "height": 620
+    }
+  ]
+}

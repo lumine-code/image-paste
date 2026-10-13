@@ -11,6 +11,8 @@ Paste clipboard images into projects as image files.
 - **Tree-view integration**: saves images into the selected directory without replacing tree-view's internal clipboard.
 - **Terminal integration**: writes an absolute, shell-safe path onto a terminal's input line.
 
+![Paste a real plot image into the project and choose its relative filename.](.github/demo.png)
+
 ## Installation
 
 To install `image-paste` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/image-paste`.
