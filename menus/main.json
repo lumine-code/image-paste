@@ -5,7 +5,9 @@
       "submenu": [
         {
           "label": "Paste Image…",
-          "command": "image-paste:paste"
+          "command": "image-paste:paste",
+          "group": "clipboard",
+          "order": 60
         }
       ]
     },
