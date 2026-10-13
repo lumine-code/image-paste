@@ -17,13 +17,9 @@ To install `image-paste` search for it in the Install pane of the Lumine setting
 
 ## Commands
 
-Commands available in `lumine-text-editor:not([mini])`:
+Commands available in `lumine-workspace`:
 
-- `image-paste:paste`: save the clipboard image and insert its relative path.
-
-Commands available in `.tree-view`:
-
-- `image-paste:paste`: save the clipboard image in the selected directory.
+- `image-paste:paste`: save the clipboard image and insert its relative path in the dispatch editor or active editor; when invoked from the tree view, save it in the selected directory.
 
 ## Usage
 

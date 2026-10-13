@@ -18,6 +18,7 @@
   "main": "./lib/main",
   "files": [
     "lib",
+    "menus",
     "spec",
     "styles"
   ],

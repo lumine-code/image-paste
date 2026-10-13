@@ -1,0 +1,27 @@
+{
+  "menu": [
+    {
+      "label": "Edit",
+      "submenu": [
+        {
+          "label": "Paste Image…",
+          "command": "image-paste:paste"
+        }
+      ]
+    },
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Image Paste",
+          "submenu": [
+            {
+              "label": "Paste Image…",
+              "command": "image-paste:paste"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
