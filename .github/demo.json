@@ -1,17 +1,70 @@
 {
   "title": "image-paste",
   "description": "Paste a real plot image into the project and choose its relative filename.",
-  "recordedOn": "2026-10-13",
-  "sourceRevision": "b2510733fe63d64723140ffac06e6e1d3ecc8f6f",
+  "recordedOn": "2026-10-14",
+  "sourceRevision": "636a529d74b5a8b32c943473ae87f19d5644d923",
+  "themeSourceRevision": "7fbd047a87ecf1367c896b19ff270cdc28d319f7",
   "mode": "normal",
   "fontSettings": "default",
-  "themeSourceRevision": "6564a9e21899b5541e9c8f8006f9be6d6d72e6ad",
+  "scenario": "demo.js",
+  "recipeHash": "e9d5da1c83e6d1bab7bec01a8c065a62e6fc8f6a3c31911c338f5e80085337d2",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "electron": "44.7.0",
+    "chrome": "152.0.7977.130",
+    "devicePixelRatio": 1,
+    "locale": "en-GB",
+    "fontFamily": "Fira Code, Menlo, DejaVu Sans Mono, Consolas, monospace",
+    "fontSize": 14,
+    "themes": ["one-day-syntax", "one-day-ui"]
+  },
+  "viewport": { "width": 1100, "height": 620 },
+  "cornerRadius": 10,
+  "sources": {
+    "editor": {
+      "revision": "f843acddbced9b8bd7bbe0a96005bb55429694ce",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "package": {
+      "revision": "636a529d74b5a8b32c943473ae87f19d5644d923",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "image-paste": {
+      "revision": "636a529d74b5a8b32c943473ae87f19d5644d923",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "language-gfm": {
+      "revision": "be723ccf806fdd4a2a06638f6e881c09a53b4409",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "one-theme": {
+      "revision": "7fbd047a87ecf1367c896b19ff270cdc28d319f7",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "fixtures": [
+    {
+      "file": "data/waveform.png",
+      "sha256": "8c186360fa5ef0e2b39997955792ef750c9b52cd776ed36de5ec5d483e32e64b"
+    },
+    {
+      "file": "image-paste/README.md",
+      "sha256": "08bf13a25b38badee61fbced3072bacec64863ae562520bbeb933139ed9b5037"
+    }
+  ],
   "images": [
     {
       "file": "demo.png",
       "label": "Paste a real plot image into the project and choose its relative filename.",
       "width": 1100,
-      "height": 620
+      "height": 620,
+      "sha256": "c74db7c90fdf9bf3b09508e1e5b866df075f14673b8011bb522ce7bf287f8c0a"
     }
   ]
 }
