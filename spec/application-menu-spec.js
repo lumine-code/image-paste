@@ -41,4 +41,22 @@ describe("Image paste application menu", () => {
       explicit: true,
     });
   });
+  it("handles an editor nested inside the tree only once through the tree owner", async () => {
+    tree = document.createElement("div");
+    tree.className = "tree-view";
+    lumine.workspace.getElement().appendChild(tree);
+    tree.appendChild(editor.element);
+    main.treeView = { selectedPaths: () => [__dirname] };
+    await lumine.commands.dispatch(editor.element, "image-paste:paste");
+    expect(main.handlePaste).toHaveBeenCalledOnceWith({
+      target: { type: "directory", path: __dirname },
+      explicit: true,
+    });
+  });
+  it("disables image insertion in read-only editors", () => {
+    editor.setReadOnly(true);
+    expect(lumine.commands.canDispatch(editor.element, "image-paste:paste")).toBe(false);
+    lumine.commands.dispatch(editor.element, "image-paste:paste");
+    expect(main.handlePaste).not.toHaveBeenCalled();
+  });
 });

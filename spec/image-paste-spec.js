@@ -52,6 +52,18 @@ describe("image-paste", () => {
     );
     expect(imagePaste.saveDialog.prepare).not.toHaveBeenCalled();
   });
+  it("does not read the clipboard or save an image for a read-only target", () => {
+    const editor = lumine.workspace.buildTextEditor();
+    const read = spyOn(lumine.clipboard, "readImage");
+    editor.setReadOnly(true);
+    try {
+      expect(imagePaste.handlePaste({ target: { type: "text-editor", editor } })).toBe(false);
+      expect(read).not.toHaveBeenCalled();
+      expect(imagePaste.saveDialog.prepare).not.toHaveBeenCalled();
+    } finally {
+      editor.destroy();
+    }
+  });
 
   it("does not inspect the filesystem for an ordinary text paste into a directory", () => {
     spyOn(lumine.clipboard, "readImage").and.returnValue({ isEmpty: () => true });
@@ -333,6 +345,23 @@ describe("image-paste", () => {
     });
 
     afterEach(() => dialog.destroy());
+    it("does not write when its captured editor becomes read-only before confirmation", async () => {
+      const editor = lumine.workspace.buildTextEditor();
+      const write = spyOn(fs.promises, "writeFile").and.resolveTo();
+      const warning = spyOn(dialog, "warn");
+      try {
+        dialog.prepare({
+          target: { type: "text-editor", editor, basePath: directoryPath },
+          pngBuffer: Buffer.from("image"),
+        });
+        editor.setReadOnly(true);
+        await dialog.confirm();
+        expect(write).not.toHaveBeenCalled();
+        expect(warning).toHaveBeenCalledWith("The target editor is closed or read-only.");
+      } finally {
+        editor.destroy();
+      }
+    });
 
     it("saves the confirmed bytes and inserts into the original target while a new image is prepared", async () => {
       let finishMkdir;
