@@ -17,13 +17,11 @@ describe("Image paste application menu", () => {
     editor.destroy();
     await lumine.packages.deactivatePackage("image-paste");
   });
-  it("uses the active editor from another focused surface", async () => {
+  it("disables pasting from surfaces that handle neither images nor files", async () => {
     button.focus();
     await lumine.commands.dispatch(button, "image-paste:paste");
-    expect(main.handlePaste).toHaveBeenCalledOnceWith({
-      target: { type: "text-editor", editor },
-      explicit: true,
-    });
+    expect(main.handlePaste).not.toHaveBeenCalled();
+    expect(lumine.commands.canDispatch(button, "image-paste:paste")).toBe(false);
   });
   it("retains the inactive editor that received the command", async () => {
     await lumine.commands.dispatch(background.getElement(), "image-paste:paste");
