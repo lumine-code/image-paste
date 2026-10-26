@@ -98,4 +98,23 @@ describe("image-paste relative save path contract", () => {
     await dialog.confirm();
     expect(fs.readFileSync(path.join(basePath, "assets", "ordinary.png"))).toEqual(pngBuffer);
   });
+
+  for (const text of ["first\nsecond", "x".repeat(5000)]) {
+    it(`does not read a ${text.includes("\n") ? "multiline" : "long"} selection for path prefill`, async () => {
+      editor = await lumine.workspace.open();
+      editor.setText(text);
+      editor.selectAll();
+      const read = spyOn(editor, "getSelectedText").and.throwError("unbounded path prefill");
+      try {
+        expect(() =>
+          dialog.prepare({ target: { type: "text-editor", editor, basePath }, pngBuffer }),
+        ).not.toThrow();
+        expect(read).not.toHaveBeenCalled();
+        expect(dialog.miniEditor.getText()).toMatch(/image-.*\.png$/);
+      } finally {
+        read.and.callThrough();
+      }
+      expect(editor.getText()).toBe(text);
+    });
+  }
 });
