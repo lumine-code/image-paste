@@ -62,14 +62,7 @@ jobs:
     env:
       LUMINE_JASMINE_REPORTER: list
       LUMINE_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT: "true"
-      LUMINE_HOME: ${{ github.workspace }}/.image-paste-runtime
-      TEMP: ${{ github.workspace }}/.image-paste-runtime/tmp
-      TMP: ${{ github.workspace }}/.image-paste-runtime/tmp
-      TMPDIR: ${{ github.workspace }}/.image-paste-runtime/tmp
     steps:
-      - name: Prepare isolated runtime directories
-        run: >-
-          node -e "require('node:fs').mkdirSync(process.env.TEMP, { recursive: true })"
       - uses: actions/checkout@v7
         with:
           path: image-paste
@@ -109,6 +102,19 @@ jobs:
       - name: Rebuild native modules for Electron
         working-directory: lumine
         run: npm run build
+      # Let the native build use the runner's temp directory.
+      - name: Prepare isolated runtime directories
+        shell: pwsh
+        run: |
+          $specHome = Join-Path $env:GITHUB_WORKSPACE '.image-paste-runtime'
+          $specTemp = Join-Path $specHome 'tmp'
+          New-Item -ItemType Directory -Path $specTemp -Force | Out-Null
+          @(
+            "LUMINE_HOME=$specHome"
+            "TEMP=$specTemp"
+            "TMP=$specTemp"
+            "TMPDIR=$specTemp"
+          ) | Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8
       - name: Run the Jasmine spec suite on Linux
         if: runner.os == 'Linux'
         working-directory: lumine
