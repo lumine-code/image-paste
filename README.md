@@ -5,10 +5,10 @@ Paste clipboard images into projects as image files.
 ## Features
 
 - **Native clipboard support**: reads standard image data from clipboard events with an Electron fallback.
-- **Safe relative paths**: saves images inside the editor's directory or selected tree-view directory.
+- **Project-relative paths**: suggests a destination based on the active editor, tree selection, or terminal launch directory.
 - **Automatic naming**: suggests stable names based on the document and image content.
-- **Editor integration**: inserts a relative path only after the image is written successfully.
-- **Tree-view integration**: saves images into the selected directory without replacing tree-view's internal clipboard.
+- **Editor integration**: inserts a document-relative path after a successful save when the destination can be expressed relative to the document.
+- **Tree-view integration**: suggests the active folder or the parent of the active file.
 - **Terminal integration**: writes an absolute, shell-safe path onto a terminal's input line.
 
 ![Paste a real plot image into the project and choose its relative filename.](.github/demo.png)
@@ -21,13 +21,15 @@ To install `image-paste` search for it in the Install pane of the Lumine setting
 
 Commands available in `lumine-text-editor:not([mini]):not([readonly]):not(.tree-view lumine-text-editor)` and `.tree-view`:
 
-- `image-paste:paste`: save the clipboard image and insert its relative path in the dispatch editor or active editor; when invoked from the tree view, save it in the selected directory.
+- `image-paste:paste` opens the save dialog for the focused editor or Tree View selection.
 
 ## Usage
 
-Copy an image, invoke the normal paste command or `image-paste:paste`, review the suggested path, and confirm the save. Editor paths are relative to the current document's directory; tree-view paths remain relative to the selected directory. PNG, JPG, and JPEG output names are supported; other extensions are converted to PNG.
+Copy an image, invoke the normal paste command or `image-paste:paste`, review the suggested path, and confirm the save. With one project folder, enter a path relative to its root. With several, start a relative path with a unique project folder name, such as `notes/docs/figure.png`. Absolute paths work in either case and are suggested for destinations outside the project or in roots that share a name.
 
-Pasting into a terminal saves relative to the directory that terminal was launched in, then writes the saved file's **absolute** path onto the input line — the shell may have cd'd elsewhere since, and only an absolute path stays true. It is quoted only when it contains whitespace, and never followed by a newline, so nothing is submitted for you. This is the form command-line programs read an image in, including coding agents that take one by path.
+The default suggestion for a text editor puts the image in `assets` beside the document. The dialog initially selects the filename without its extension. Press `F2` to switch between that selection and the whole filename. PNG, JPG, and JPEG output names are supported. Other extensions are converted to PNG.
+
+Pasting into a terminal suggests a destination in the directory where the terminal was launched. After saving, it writes the absolute path onto the input line so it still works if the shell has moved to a different directory. Paths containing whitespace are quoted. The line stays ready for editing or submission.
 
 ## Customization
 

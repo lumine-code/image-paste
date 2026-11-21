@@ -17,6 +17,7 @@
   "license": "MIT",
   "main": "./lib/main",
   "files": [
+    "keymaps",
     "lib",
     "menus",
     "spec",
@@ -34,7 +35,7 @@
   "configSchema": {
     "assetsDirectory": {
       "title": "Assets Directory",
-      "description": "Editor-relative directory used when saving images pasted into text editors.",
+      "description": "Directory relative to the document used in the suggested save path when pasting into a text editor.",
       "type": "string",
       "default": "assets"
     },

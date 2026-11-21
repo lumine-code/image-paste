@@ -1,0 +1,5 @@
+{
+  ".image-paste.save-dialog lumine-text-editor[mini]": {
+    "f2": "image-paste:select-name"
+  }
+}
