@@ -2,7 +2,7 @@
   "title": "image-paste",
   "description": "Paste a real plot image into the project and choose its relative filename.",
   "recordedOn": "2026-11-21",
-  "sourceRevision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
+  "sourceRevision": "bb6cd5688b786485d03d32c639a90d0c649ee513",
   "themeSourceRevision": "e477cb9a3576f124b0d415183e8d608fbae0182e",
   "mode": "normal",
   "fontSettings": "default",
@@ -29,14 +29,14 @@
       "workingTreeHash": "cc4aac29731b750f6dae1bbbdee78ff23b50366519c108e55762d9b40ed06b30"
     },
     "package": {
-      "revision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
-      "dirty": true,
-      "workingTreeHash": "f27ae3a61929c0e75ee546e47058c28da7fdc36137ace7d9ba14715a1d0026bc"
+      "revision": "bb6cd5688b786485d03d32c639a90d0c649ee513",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "image-paste": {
-      "revision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
-      "dirty": true,
-      "workingTreeHash": "f27ae3a61929c0e75ee546e47058c28da7fdc36137ace7d9ba14715a1d0026bc"
+      "revision": "bb6cd5688b786485d03d32c639a90d0c649ee513",
+      "dirty": false,
+      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "language-gfm": {
       "revision": "0661bdc9f2384d54c5618273c253c27873b14f4b",
@@ -65,7 +65,7 @@
       "label": "Paste a real plot image into the project and choose its relative filename.",
       "width": 1100,
       "height": 620,
-      "sha256": "69444fb5d5e56f65652c5138cef0b8f541a3bf53ad8c68c91a653cb304894f54"
+      "sha256": "d81e0135c2d6f66d0a3b1d2d998e7837aad630a22e56263762042c1f862e213b"
     }
   ]
 }
