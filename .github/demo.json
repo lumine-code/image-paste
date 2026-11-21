@@ -1,9 +1,9 @@
 {
   "title": "image-paste",
   "description": "Paste a real plot image into the project and choose its relative filename.",
-  "recordedOn": "2026-11-05",
-  "sourceRevision": "a035e663ee0e040761f3c91296a13d05a16559ea",
-  "themeSourceRevision": "6e7e9f93cc5b0612b4631e06d0b80e5ca88a7302",
+  "recordedOn": "2026-11-21",
+  "sourceRevision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
+  "themeSourceRevision": "e477cb9a3576f124b0d415183e8d608fbae0182e",
   "mode": "normal",
   "fontSettings": "default",
   "scenario": "demo.js",
@@ -11,8 +11,8 @@
   "environment": {
     "platform": "win32",
     "arch": "x64",
-    "electron": "45.2.3",
-    "chrome": "156.0.8078.80",
+    "electron": "45.4.1",
+    "chrome": "156.0.8078.100",
     "devicePixelRatio": 1,
     "locale": "en-GB",
     "fontFamily": "Fira Code, Menlo, DejaVu Sans Mono, Consolas, monospace",
@@ -21,30 +21,30 @@
   },
   "viewport": { "width": 1100, "height": 620 },
   "cornerRadius": 10,
-  "privacy": { "version": 1, "location": "neutral", "textChecked": true },
+  "privacy": { "version": 1, "location": "workspace-scratch", "textChecked": true },
   "sources": {
     "editor": {
-      "revision": "55e7d15c5f86ea3ff86c21a599f40b4a753e71fd",
-      "dirty": false,
-      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      "revision": "cf34da37fdbcc4f64bb7f28a3aeec9dc2f84f78d",
+      "dirty": true,
+      "workingTreeHash": "cc4aac29731b750f6dae1bbbdee78ff23b50366519c108e55762d9b40ed06b30"
     },
     "package": {
-      "revision": "a035e663ee0e040761f3c91296a13d05a16559ea",
-      "dirty": false,
-      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      "revision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
+      "dirty": true,
+      "workingTreeHash": "f27ae3a61929c0e75ee546e47058c28da7fdc36137ace7d9ba14715a1d0026bc"
     },
     "image-paste": {
-      "revision": "a035e663ee0e040761f3c91296a13d05a16559ea",
-      "dirty": false,
-      "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      "revision": "de521ab2c9f1400d8d5479fb7b9d0ff5e4379839",
+      "dirty": true,
+      "workingTreeHash": "f27ae3a61929c0e75ee546e47058c28da7fdc36137ace7d9ba14715a1d0026bc"
     },
     "language-gfm": {
-      "revision": "dbdfa0d7eb55a25a9cd6e4b7f8b388bc5d99dc6f",
+      "revision": "0661bdc9f2384d54c5618273c253c27873b14f4b",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "one-theme": {
-      "revision": "6e7e9f93cc5b0612b4631e06d0b80e5ca88a7302",
+      "revision": "e477cb9a3576f124b0d415183e8d608fbae0182e",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
@@ -65,7 +65,7 @@
       "label": "Paste a real plot image into the project and choose its relative filename.",
       "width": 1100,
       "height": 620,
-      "sha256": "0afd3e4ff992c9260e5d8d9fe63e22f05dba1b6f97b419f9e3ac897f0213a55b"
+      "sha256": "69444fb5d5e56f65652c5138cef0b8f541a3bf53ad8c68c91a653cb304894f54"
     }
   ]
 }

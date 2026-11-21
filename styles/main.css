@@ -13,6 +13,14 @@ lumine-panel.modal.image-paste.save-dialog .image-paste-preview {
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
+  margin-top: 1em;
+  overflow: hidden;
+  background-color: var(
+    --image-paste-preview-background-color,
+    var(--inset-panel-background-color)
+  );
+  border: 1px solid var(--base-border-color);
+  border-radius: var(--ui-border-radius);
 }
 
 lumine-panel.modal.image-paste.save-dialog .image-paste-preview img {
@@ -20,16 +28,8 @@ lumine-panel.modal.image-paste.save-dialog .image-paste-preview img {
   width: auto;
   height: auto;
   max-width: 100%;
-
-  margin-top: 1em;
-  max-height: var(--image-paste-preview-max-height, calc(100vh - 10rem));
+  max-height: calc(var(--image-paste-preview-max-height, 100vh - 10rem) - 2px);
   box-sizing: border-box;
-  background-color: var(
-    --image-paste-preview-background-color,
-    var(--inset-panel-background-color)
-  );
-  border: 1px solid var(--base-border-color);
-  border-radius: var(--ui-border-radius);
   object-fit: contain;
   object-position: center;
 }
